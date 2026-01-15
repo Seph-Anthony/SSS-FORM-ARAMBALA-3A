@@ -1,0 +1,1191 @@
+body {
+  margin: 0;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.outercontainer {
+  width: 100%;
+  padding: 0px;
+}
+
+.PART1 {
+  padding: 0px;
+  border-style: solid;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.intropart1 {
+  margin: 1px;
+  font-size: 14px;
+  font-family: sans-serif;
+}
+
+.innercontainerpart1 {
+  padding: 0px;
+  border-style: solid;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+/* A-PART 1 SECTION 1 */
+
+.introA {
+  margin: 1px;
+  font-size: 14px;
+  font-family: sans-serif;
+}
+
+.part1A {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  flex-direction: column;
+}
+
+.Asection1 {
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  flex-direction: row;
+  width: 100%;
+}
+
+.outerdateofbirth,
+.outerfullname {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.outerfullname {
+  width: 80%;
+  padding: 0;
+  margin: 0;
+  gap: 10px;
+  border-style: solid;
+  font-family: sans-serif;
+  font-weight: 200;
+  font-size: 11px;
+  display: flex;
+  flex-direction: row;
+}
+
+.outerfullname input {
+  width: 80%;
+}
+.NAME {
+  margin-right: 20px;
+  font-weight: 200;
+}
+
+.lastname {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.firstname {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.middlename {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.suffix {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.outerdateofbirth {
+  border-style: solid;
+  width: 20%;
+}
+.desdateofbirth {
+  font-weight: 200;
+  font-size: 11px;
+  display: flex;
+  font-family: sans-serif;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+/* A-PART 1 SECTION 2 */
+
+.Asection2 {
+  width: 100%;
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  flex-direction: row;
+}
+.desSEX {
+  gap: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  font-family: sans-serif;
+  font-weight: 200;
+  width: 20%;
+  border-style: solid;
+  font-size: 12px;
+}
+
+.desCIVIL {
+  gap: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  font-family: sans-serif;
+  font-weight: 200;
+  font-size: 12px;
+  width: 55%;
+  border-style: solid;
+}
+.desCIVIL input {
+  font-size: 10px;
+}
+
+.desTAX {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  font-family: sans-serif;
+  font-weight: 200;
+  width: 25%;
+  font-size: 12px;
+  border-style: solid;
+}
+
+/* A-PART 1 SECTION 3 */
+
+.Asection3 {
+  width: 100%;
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  flex-direction: row;
+}
+
+.desnationality {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  font-family: sans-serif;
+  font-weight: 200;
+  width: 15%;
+  font-size: 12px;
+  border-style: solid;
+  padding: 0 10px 0 10px;
+}
+.desnationality input,
+.desreligion input {
+  font-size: 10px;
+}
+
+.desreligion {
+  width: 15%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  font-family: sans-serif;
+  font-weight: 200;
+  font-size: 12px;
+  border-style: solid;
+  padding: 0 10px 0 10px;
+}
+
+.desplaceofbirth {
+  width: 70%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  font-family: sans-serif;
+  font-size: 10px;
+  font-size: 400;
+  border-style: solid;
+  padding: 0 10px 0 10px;
+}
+
+.des {
+  margin: 10px;
+  font-size: 10px;
+  font-size: 10px;
+}
+
+/* A-PART 1 SECTION 4 */
+
+#home-address-section {
+  width: 100%;
+}
+
+#forhidingreason {
+  display: none;
+  margin-top: 5px;
+}
+
+.Asection4 {
+  display: flex;
+  align-items: stretch;
+  justify-content: space-between;
+  flex-direction: row;
+  width: 100%;
+  padding-bottom: 5px;
+  border-style: solid;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-weight: 100;
+}
+.homeaddress {
+  margin-left: 5px;
+}
+
+.rmunit {
+  font-family: sans-serif;
+  font-size: 10px;
+  text-align: center;
+}
+.rmunit input,
+.houselot input,
+.streetname input,
+.subdivision input {
+  font-size: 12px;
+}
+
+.houselot {
+  text-align: center;
+  font-family: sans-serif;
+  font-size: 10px;
+}
+
+.streetname {
+  text-align: center;
+  font-family: sans-serif;
+  font-size: 10px;
+}
+
+.subdivision {
+  text-align: center;
+  font-family: sans-serif;
+  font-size: 10px;
+  margin-right: 5px;
+}
+
+/* A-PART 1 SECTION 5 */
+
+.Asection5 {
+  text-align: center;
+  display: flex;
+  align-items: stretch;
+  justify-content: space-between;
+  flex-direction: row;
+  width: 100%;
+  gap: 20px;
+  border-style: solid;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-weight: 100;
+}
+.bardisloc {
+  text-align: center;
+  font-family: sans-serif;
+  font-size: 10px;
+  margin-left: 5px;
+}
+
+.citymuni {
+  text-align: center;
+  font-family: sans-serif;
+  font-size: 10px;
+}
+
+.province {
+  text-align: center;
+  font-family: sans-serif;
+  font-size: 10px;
+}
+
+.country {
+  text-align: center;
+  font-family: sans-serif;
+  font-size: 10px;
+}
+
+.zip {
+  border-style: solid;
+
+  font-family: sans-serif;
+  font-size: 10px;
+}
+.zip p {
+  font-weight: 700;
+  margin-left: 10px;
+  text-align: start;
+}
+.zip input {
+  text-align: center;
+  width: 70%;
+}
+
+/* A-PART 1 SECTION 6 */
+
+.Asection6 {
+  text-align: center;
+  display: flex;
+  align-items: stretch;
+  justify-content: space-between;
+  flex-direction: row;
+  width: 100%;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-weight: 100;
+}
+
+.cellnum {
+  width: 33.33%;
+  border-style: solid;
+  padding: 5px;
+  font-family: sans-serif;
+  font-size: 10px;
+}
+
+.email {
+  width: 33.33%;
+  border-style: solid;
+  padding: 5px;
+  font-family: sans-serif;
+  font-size: 10px;
+}
+
+.telephonenumber {
+  width: 33.33%;
+  border-style: solid;
+  padding: 5px;
+  font-family: sans-serif;
+  font-size: 10px;
+}
+
+/* A-PART 1 SECTION 7 */
+
+.Asection7 {
+  text-align: center;
+  display: flex;
+  align-items: stretch;
+  justify-content: space-between;
+  flex-direction: row;
+  width: 100%;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-weight: 100;
+}
+
+.fatherinfo {
+  font-weight: 700;
+  margin-left: 10px;
+  text-align: start;
+}
+
+.fatherfirstname,
+.fatherlname,
+.fathermiddlename,
+.fathersuffix {
+  font-family: sans-serif;
+  font-size: 10px;
+  margin-bottom: 5px;
+}
+
+/* A - PART 1 SECTION 8 */
+
+.Asection8 {
+  text-align: center;
+  display: flex;
+  align-items: stretch;
+  justify-content: space-between;
+  flex-direction: row;
+  width: 100%;
+  border-style: solid;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-weight: 100;
+}
+
+.motherinfo {
+  font-weight: 700;
+  margin-left: 5px;
+  text-align: start;
+}
+
+.motherlname,
+.motherfname,
+.mothermiddlename,
+.mothersuffix {
+  font-family: sans-serif;
+  font-size: 10px;
+  margin-bottom: 5px;
+}
+
+/* B - PART 1 INTRODUCTION */
+.introB {
+  margin: 1px;
+  font-size: 14px;
+  font-family: sans-serif;
+}
+
+.part1B {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  flex-direction: column;
+}
+
+/* B - PART 1 SECTION 1 */
+
+.Bsection1 {
+  text-align: center;
+  display: flex;
+  align-items: stretch;
+  justify-content: space-between;
+  flex-direction: row;
+  width: 100%;
+  border-style: solid;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-weight: 100;
+}
+
+.spouseinfo {
+  font-weight: 700;
+  margin-left: 5px;
+  text-align: start;
+}
+
+.spouselname,
+.spousefirstname,
+.spousemiddlename,
+.spousesuffix {
+  font-size: 10px;
+  margin: 5px;
+  text-align: center;
+}
+
+/* B - PART 1 SECTION 2 */
+
+.Bsection2 {
+  text-align: center;
+  display: flex;
+  align-items: stretch;
+  justify-content: space-between;
+  flex-direction: row;
+  width: 100%;
+  border-style: solid;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-weight: 100;
+}
+
+.childreninfo {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: column;
+  font-weight: 700;
+  margin-left: 5px;
+  text-align: start;
+}
+
+.childlastname1,
+.childfirstname1,
+.childmiddlename1,
+.childsuffixname1,
+.childbirthdate1 {
+  font-size: 10px;
+
+  width: 20%;
+  text-align: center;
+}
+.childbirthdate1 {
+  border-style: solid;
+  padding-left: 13px;
+}
+
+/* B - PART 1 SECTION 3 */
+
+.Bsection3 {
+  text-align: center;
+  display: flex;
+  align-items: stretch;
+  justify-content: space-between;
+  flex-direction: row;
+  width: 100%;
+  border-style: solid;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-weight: 100;
+}
+
+.childlastname2,
+.childfirstname2,
+.childmiddlename2,
+.childsuffixname2,
+.childbirthdate2 {
+  font-size: 10px;
+
+  width: 20%;
+  text-align: center;
+}
+.childbirthdate2 {
+  border-style: solid;
+  padding-bottom: 10px;
+}
+
+/* B - PART 1 SECTION 4 */
+.Bsection4 {
+  text-align: center;
+  display: flex;
+  align-items: stretch;
+  justify-content: space-between;
+  flex-direction: row;
+  width: 100%;
+  border-style: solid;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-weight: 100;
+}
+
+.childlastname3,
+.childfirstname3,
+.childmiddlename3,
+.childsuffixname3,
+.childbirthdate3 {
+  font-size: 10px;
+
+  width: 20%;
+  text-align: center;
+}
+.childbirthdate3 {
+  border-style: solid;
+  padding-bottom: 10px;
+}
+
+/* B - PART 1 SECTION 5 */
+
+.Bsection5 {
+  text-align: center;
+  display: flex;
+  align-items: stretch;
+  justify-content: space-between;
+  flex-direction: row;
+  width: 100%;
+  border-style: solid;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-weight: 100;
+}
+
+.childlastname4,
+.childfirstname4,
+.childmiddlename4,
+.childsuffixname4,
+.childbirthdate4 {
+  font-size: 10px;
+
+  width: 20%;
+  text-align: center;
+}
+.childbirthdate4 {
+  border-style: solid;
+  padding-bottom: 10px;
+}
+
+/* B - PART 1 SECTION 6 */
+
+.Bsection6 {
+  text-align: center;
+  display: flex;
+  align-items: stretch;
+  justify-content: space-between;
+  flex-direction: row;
+  width: 100%;
+  border-style: solid;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-weight: 100;
+}
+
+.childlastname5,
+.childfirstname5,
+.childmiddlename5,
+.childsuffixname5,
+.childbirthdate5 {
+  font-size: 10px;
+
+  width: 20%;
+  text-align: center;
+}
+.childbirthdate5 {
+  border-style: solid;
+  padding-bottom: 10px;
+}
+
+/* B - PART 1 SECTION 7 */
+
+.Bsection7 {
+  text-align: center;
+  display: flex;
+  align-items: stretch;
+  justify-content: space-between;
+  flex-direction: row;
+  width: 100%;
+  border-style: solid;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-weight: 100;
+}
+
+.otherbene {
+  border-style: solid;
+  display: flex;
+  width: 70%;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.otherdes {
+  font-family: sans-serif;
+  text-align: center;
+
+  font-family: 10px;
+}
+
+.otherlastname1,
+.otherfirstname1,
+.othermiddlename1,
+.othersuffixname1 {
+  font-size: 10px;
+  padding-left: 5px;
+  text-align: center;
+  padding-bottom: 5px;
+}
+
+.otherinfo {
+  text-align: center;
+  display: flex;
+  align-items: stretch;
+  justify-content: space-between;
+  flex-direction: row;
+  width: 100%;
+
+  font-family: sans-serif;
+  font-size: 10px;
+  font-weight: 100;
+}
+
+.otherRelationship1 {
+  font-size: 10px;
+  display: flex;
+  width: 15%;
+  align-items: flex-start;
+  justify-content: end;
+  flex-direction: column;
+  border-style: solid;
+  text-align: left;
+  padding: 5px;
+}
+
+.otherdateofbirth1 {
+  font-size: 10px;
+  display: flex;
+  width: 15%;
+  align-items: center;
+  justify-content: end;
+  flex-direction: column;
+  border-style: solid;
+  text-align: left;
+  padding: 5px;
+}
+
+/* B - PART 1 SECTION 8 */
+
+.Bsection8 {
+  text-align: center;
+  display: flex;
+  align-items: stretch;
+  justify-content: space-between;
+  flex-direction: row;
+  width: 100%;
+  border-style: solid;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-weight: 100;
+}
+
+.outerotherinfo2 {
+  text-align: center;
+  display: flex;
+  align-items: stretch;
+  justify-content: space-between;
+  flex-direction: row;
+  width: 70%;
+
+  font-family: sans-serif;
+  font-size: 10px;
+  font-weight: 100;
+}
+.otherlastname2,
+.otherfirstname2,
+.othermiddlename2,
+.othersuffixname2 {
+  font-size: 10px;
+  padding-left: 5px;
+  text-align: center;
+  padding-bottom: 5px;
+}
+
+.otherRelationship2 {
+  font-size: 10px;
+  display: flex;
+  width: 15%;
+  align-items: flex-start;
+  justify-content: end;
+  flex-direction: column;
+  border-style: solid;
+  text-align: left;
+  padding: 5px;
+}
+
+.otherdateofbirth2 {
+  font-size: 10px;
+  display: flex;
+  width: 15%;
+  align-items: center;
+  justify-content: end;
+  flex-direction: column;
+  border-style: solid;
+  text-align: left;
+  padding: 5px;
+}
+
+/* C - PART 1 SECTION 1 */
+
+.part1C {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  flex-direction: column;
+}
+
+.Csection1 {
+  text-align: center;
+  display: flex;
+  align-items: stretch;
+  justify-content: space-between;
+  flex-direction: row;
+  width: 100%;
+  border-style: solid;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-weight: 100;
+}
+
+.S1innerC1 {
+  display: flex;
+  width: 25%;
+  justify-content: center;
+  flex-direction: column;
+  font-size: 10px;
+  border-style: solid;
+  gap: 5px;
+  padding: 10px;
+  font-weight: 100;
+}
+.S1innerC1 p {
+  text-align: left;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.S1innerC1 input {
+  margin: 5px;
+}
+
+.S1innerC2 {
+  display: flex;
+  width: 50%;
+  justify-content: space-evenly;
+  flex-direction: column;
+  font-size: 10px;
+  border-style: solid;
+
+  font-weight: 100;
+}
+
+.S1innerC2 p {
+  text-align: left;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.C2inner1 {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.C2inner2 {
+  margin: 10px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+}
+
+.C2inner2 input {
+  width: 20%;
+  margin: 10px;
+}
+
+.C2inner2 p {
+  font-size: 10px;
+  font-weight: 200;
+}
+.flexifund {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.innerflexifund {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+}
+
+.innerflexifund input {
+  margin: 10px;
+}
+
+.S1innerC3 {
+  width: 25%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  border-style: solid;
+}
+.innerC3 {
+  width: 100%;
+  border-style: solid;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.innerC3 input {
+  border-style: solid;
+  border-color: gray;
+  border-width: 1px;
+}
+.parainner3 {
+  font-size: 12px;
+  font-weight: 700;
+}
+.signature {
+  font-size: 8px;
+  font-weight: 200;
+}
+/* D - PART 1 SECTION 1 AND INTRODUCTION */
+.part1D {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  border-style: solid;
+  font-family: sans-serif;
+  flex-direction: column;
+}
+.outerD {
+  display: flex;
+  align-items: stretch;
+  justify-content: space-between;
+  width: 100%;
+  border-style: solid;
+  font-family: sans-serif;
+  flex-direction: row;
+}
+
+.part1D h3 {
+  font-size: 12px;
+  font-weight: 700;
+}
+.innerD1 {
+  border-style: solid;
+  display: flex;
+  width: 60%;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  font-size: 12px;
+  font-weight: 200;
+}
+.D1des {
+  font-size: 10px;
+  font-weight: 200;
+}
+.D1info {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  width: 100%;
+  font-size: 10px;
+  font-weight: 200;
+}
+.printedname {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 100%;
+}
+.printedname input {
+  border-style: solid;
+  border-color: gray;
+  padding: 3px;
+  border-width: 1px;
+}
+
+.innerD2 {
+  font-family: 12px;
+  font-weight: 200;
+  font-family: sans-serif;
+  display: flex;
+  align-items: center;
+  justify-self: center;
+  border-style: solid;
+  flex-direction: column;
+  width: 40%;
+}
+
+.D2des {
+  width: 100%;
+  text-align: center;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.D2info {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  gap: 10px;
+}
+.thumb input {
+  border-style: solid;
+  border-color: gray;
+  border-width: 1px;
+  width: 50%;
+  padding: 20px;
+}
+.thumb {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  font-size: 10px;
+  font-weight: 200;
+}
+
+/* PART 2 SECTION 1 AND INTRODUCTIONs */
+.innercontainerpart2 {
+  font-family: sans-serif;
+  flex-direction: column;
+  font-size: 12px;
+  font-weight: 200;
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+.part2section1 {
+  display: flex;
+  border-style: solid;
+  width: 100%;
+  flex-direction: row;
+  align-items: stretch;
+  justify-content: space-between;
+}
+
+.innerpart2S1,
+.innerpart2S2 {
+  border-style: solid;
+}
+
+.innerpart2S1 {
+  width: 50%;
+  border-style: solid;
+  /* border-color: aqua; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+}
+
+.mostinnerS1 {
+  width: 100%;
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  flex-direction: column;
+}
+.businesscode {
+  padding-bottom: 5px;
+  width: 100%;
+  border-style: solid;
+
+  text-align: center;
+  font-size: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  font-weight: 200;
+}
+.businesscode input {
+  width: 40%;
+}
+
+.innerbusiness {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  padding: 2px;
+}
+
+.innerpart2S2 {
+  display: flex;
+  font-size: 12px;
+  font-family: sans-serif;
+  font-weight: 200;
+  align-items: stretch;
+  justify-content: flex-start;
+  flex-direction: column;
+}
+
+.outerinnerS2 {
+  width: 100%;
+}
+.outerinnerS3 {
+  padding-top: 10px;
+  width: 100%;
+}
+
+.outerinnerS2 {
+  display: flex;
+  font-size: 12px;
+  font-family: sans-serif;
+  font-weight: 200;
+  align-items: stretch;
+  justify-content: center;
+  flex-direction: row;
+}
+
+.innerouter1,
+.innerouter2 {
+  display: flex;
+  font-size: 12px;
+  font-family: sans-serif;
+  font-weight: 200;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.innerouter1 {
+  border-style: solid;
+}
+.innerouter2 {
+  border-style: solid;
+}
+.inners1 {
+  font-size: 10px;
+  font-family: sans-serif;
+  font-weight: 200;
+}
+.inners2 {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+.signsign {
+  font-size: 10px;
+  font-family: sans-serif;
+  font-weight: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.signsign input {
+  border-width: 1px;
+  border-style: solid;
+  margin: 2px;
+  padding: 2px;
+}
+
+.submitbuttn {
+  border-style: none;
+  color: white;
+  border-radius: 15px;
+  background-color: rgb(0, 191, 172);
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 15px;
+  letter-spacing: 1px;
+  font-weight: 900;
+  padding: 15px 35px 15px 35px;
+  margin: 5px;
+  transition: all 0.4s ease-in-out;
+}
+
+.submitbuttn:hover {
+  background-color: rgb(0, 140, 126);
+  cursor: pointer;
+  transform: translateY(-3px);
+}
