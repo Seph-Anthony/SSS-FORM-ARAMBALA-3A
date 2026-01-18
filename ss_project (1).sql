@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3307
--- Generation Time: Jan 16, 2026 at 08:29 PM
+-- Generation Time: Jan 18, 2026 at 07:15 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -38,7 +38,7 @@ CREATE TABLE `beneficiaries_data` (
 --
 
 INSERT INTO `beneficiaries_data` (`reg_id`, `children_info`, `other_beneficiaries`) VALUES
-(6, 'Child 1: na na; Child 2: na na; Child 3: na na; Child 4: na na; Child 5: na na; ', 'na na (na)');
+(8, 'Child 1: Jeven Arambala; Child 2: Nile Arambala; Child 3: Peter Arambala; Child 4: Christian Arambala; Child 5: CJ Arambala; ', 'NA NA (NA)');
 
 -- --------------------------------------------------------
 
@@ -59,7 +59,7 @@ CREATE TABLE `employment_certification` (
 --
 
 INSERT INTO `employment_certification` (`reg_id`, `employment_type`, `monthly_earnings`, `profession`, `cert_date`) VALUES
-(6, 'OFW', '125500', 'ewdsadsa', '2026-01-01');
+(8, 'OFW', '12000', 'NA', '2222-02-22');
 
 -- --------------------------------------------------------
 
@@ -79,7 +79,7 @@ CREATE TABLE `family_data` (
 --
 
 INSERT INTO `family_data` (`reg_id`, `father_name`, `mother_name`, `spouse_name`) VALUES
-(6, 'Jeffree Arambala', 'Amelita  delacalzada', 'Zennia Requillo');
+(8, 'Jeffree Arambala', 'Amelita  delacalzada', 'Zennia Requillo');
 
 -- --------------------------------------------------------
 
@@ -112,7 +112,7 @@ CREATE TABLE `personal_data` (
 --
 
 INSERT INTO `personal_data` (`reg_id`, `lastname`, `firstname`, `middlename`, `suffix`, `dob`, `gender`, `civilstatus`, `civil_status_reason`, `tax_number`, `nationality`, `religion`, `pob_city`, `pob_country`, `home_address`, `mobile`, `email`) VALUES
-(6, 'Arambala', 'Joseph', 'Anthony', 'D.', '2222-02-22', 'male', 'single', '', '11223344', 'Filipino', 'Roman Catholic', 'Ward 2 Minglanilla Cebu', 'Cebu City', 'Ward 2 Minglanilla Cebu', '09567432223', 'general@gmail.com');
+(8, 'Arambala', 'Joseph ', 'Anthony', 'D.', '2222-02-22', 'male', 'single', '', '123456', 'Filipino', 'Roman Catholic', 'Ward 2 Minglanilla Cebu', 'Cebu City', 'Ward 2 Minglanilla Cebu', '09456332123', 'josephanthonyarambala1@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -133,7 +133,7 @@ CREATE TABLE `sss_internal_data` (
 --
 
 INSERT INTO `sss_internal_data` (`reg_id`, `ss_number`, `business_code`, `msc_amount`, `processed_by`) VALUES
-(6, '123456789', '123', '10000', 'SSS Representative');
+(8, '123456', '123', '12000', 'SSS System');
 
 --
 -- Indexes for dumped tables
@@ -177,7 +177,7 @@ ALTER TABLE `sss_internal_data`
 -- AUTO_INCREMENT for table `personal_data`
 --
 ALTER TABLE `personal_data`
-  MODIFY `reg_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `reg_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- Constraints for dumped tables
