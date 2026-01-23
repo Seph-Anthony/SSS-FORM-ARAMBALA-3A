@@ -2,8 +2,8 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1:3307
--- Generation Time: Jan 18, 2026 at 07:15 PM
+-- Host: 127.0.0.1
+-- Generation Time: Jan 23, 2026 at 09:50 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -38,7 +38,9 @@ CREATE TABLE `beneficiaries_data` (
 --
 
 INSERT INTO `beneficiaries_data` (`reg_id`, `children_info`, `other_beneficiaries`) VALUES
-(8, 'Child 1: Jeven Arambala; Child 2: Nile Arambala; Child 3: Peter Arambala; Child 4: Christian Arambala; Child 5: CJ Arambala; ', 'NA NA (NA)');
+(8, 'Child 1: Jeven Arambala; Child 2: Nile Arambala; Child 3: Peter Arambala; Child 4: Christian Arambala; Child 5: CJ Arambala; ', 'NA NA (NA)'),
+(9, 'Child 1: Zennia Arambala; Child 2: NA NA; Child 3: NA NA; Child 4:NA NA;Child 5:NA NA;', 'WALA WALA (mego ra)'),
+(10, 'Child 1: N/A N/A; Child 2: N/A N/A; Child 3: N/A N/A; Child 4: N/A N/A; Child 5: N/A N/A; ', 'WALA NA WALA NA (Family)');
 
 -- --------------------------------------------------------
 
@@ -59,7 +61,9 @@ CREATE TABLE `employment_certification` (
 --
 
 INSERT INTO `employment_certification` (`reg_id`, `employment_type`, `monthly_earnings`, `profession`, `cert_date`) VALUES
-(8, 'OFW', '12000', 'NA', '2222-02-22');
+(8, 'OFW', '12000', 'NA', '2222-02-22'),
+(9, 'OFW', '12000', 'ewdsadsa', '0000-00-00'),
+(10, 'OFW', '12600', 'ewdsadsa', '8888-08-08');
 
 -- --------------------------------------------------------
 
@@ -79,7 +83,9 @@ CREATE TABLE `family_data` (
 --
 
 INSERT INTO `family_data` (`reg_id`, `father_name`, `mother_name`, `spouse_name`) VALUES
-(8, 'Jeffree Arambala', 'Amelita  delacalzada', 'Zennia Requillo');
+(8, 'Jeffree Arambala', 'Amelita  delacalzada', 'Zennia Requillo'),
+(9, 'Jerran Emnace', 'Denden Amelita', ''),
+(10, 'Jeffree Arambala', 'Amelita de la Calzada', 'Zennia Requillo');
 
 -- --------------------------------------------------------
 
@@ -112,7 +118,9 @@ CREATE TABLE `personal_data` (
 --
 
 INSERT INTO `personal_data` (`reg_id`, `lastname`, `firstname`, `middlename`, `suffix`, `dob`, `gender`, `civilstatus`, `civil_status_reason`, `tax_number`, `nationality`, `religion`, `pob_city`, `pob_country`, `home_address`, `mobile`, `email`) VALUES
-(8, 'Arambala', 'Joseph ', 'Anthony', 'D.', '2222-02-22', 'male', 'single', '', '123456', 'Filipino', 'Roman Catholic', 'Ward 2 Minglanilla Cebu', 'Cebu City', 'Ward 2 Minglanilla Cebu', '09456332123', 'josephanthonyarambala1@gmail.com');
+(8, 'Arambala', 'Joseph ', 'Anthony', 'D.', '2222-02-22', 'male', 'single', '', '123456', 'Filipino', 'Roman Catholic', 'Ward 2 Minglanilla Cebu', 'Cebu City', 'Ward 2 Minglanilla Cebu', '09456332123', 'josephanthonyarambala1@gmail.com'),
+(9, 'Mike ', 'John', 'Bert', 'E.', '2222-02-22', 'male', 'widowed', '', '123456', 'Filipino', 'Roman Catholic', 'Ward 2 Minglanilla Cebu', 'Cebu City', 'Ward 2 Minglanilla Cebu', '09786543212', 'josephanthonyarambala1@gmail.com'),
+(10, 'Dela Cruz', 'Joseph ', 'Emnace', 'E.', '2222-02-22', 'male', 'single', '', '123456', 'Filipino', 'Roman Catholic', 'Ward 2 Minglanilla Cebu', 'Cebu City', 'Ward 2 Minglanilla Cebu', '09675456789', 'general@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -133,7 +141,9 @@ CREATE TABLE `sss_internal_data` (
 --
 
 INSERT INTO `sss_internal_data` (`reg_id`, `ss_number`, `business_code`, `msc_amount`, `processed_by`) VALUES
-(8, '123456', '123', '12000', 'SSS System');
+(8, '123456', '123', '12000', 'SSS System'),
+(9, '777777777', '123', '123456', 'SSS System'),
+(10, '675849', '123', '12345', 'SSS System');
 
 --
 -- Indexes for dumped tables
@@ -177,7 +187,7 @@ ALTER TABLE `sss_internal_data`
 -- AUTO_INCREMENT for table `personal_data`
 --
 ALTER TABLE `personal_data`
-  MODIFY `reg_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `reg_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- Constraints for dumped tables
