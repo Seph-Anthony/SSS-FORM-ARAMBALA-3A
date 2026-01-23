@@ -23,7 +23,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['submitinformation']))
 
  
     if (saveSSSRegistration($pdo, $_POST)) {
-        echo "<script>alert('All data successfully linked and saved!'); window.location='index.html';</script>";
+        echo "<script>alert('All data successfully linked and saved!'); window.location='index.php';</script>";
     } else {
         echo "<script>alert('Error: Could not save data. Check logs.'); window.history.back();</script>";
     }
