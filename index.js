@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 document.addEventListener("DOMContentLoaded", function () {
   const civilStatusRadios = document.querySelectorAll(
-    'input[name="civilstatus"]'
+    'input[name="civilstatus"]',
   );
   const reasonforother = document.getElementById("forhidingreason");
 
@@ -46,7 +46,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const dob = document.querySelector('input[name="dateofbirth"]').value;
     const gender = document.querySelector('input[name="gender"]:checked');
     const civilStatus = document.querySelector(
-      'input[name="civilstatus"]:checked'
+      'input[name="civilstatus"]:checked',
     );
     const nationality = document
       .querySelector('input[name="nationality"]')
@@ -59,7 +59,7 @@ document.addEventListener("DOMContentLoaded", function () {
       .value.trim();
 
     const sameAddressChecked = document.querySelector(
-      'input[name="samehomeaddress"]'
+      'input[name="samehomeaddress"]',
     ).checked;
     const pob = document
       .querySelector('input[name="city&province"]')
@@ -83,7 +83,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
     if (civilStatus && civilStatus.value === "others" && reasonText === "") {
       errors.push(
-        "Please provide a reason for selecting 'Others' in Civil Status."
+        "Please provide a reason for selecting 'Others' in Civil Status.",
       );
     }
 

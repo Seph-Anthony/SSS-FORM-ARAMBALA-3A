@@ -1,124 +1,157 @@
 <?php
 require "db.php";
+session_start();
 
+/**
+ * Saves or updates SSS registration data across multiple tables.
+ */
 function saveSSSRegistration(PDO $pdo, array $data) {
     try {
         $pdo->beginTransaction();
 
-      //    PERSONAL DATA NGA TABLE
-        $sqlA = "INSERT INTO personal_data (lastname, firstname, middlename, suffix, dob, gender, civilstatus, civil_status_reason, tax_number, nationality, religion, pob_city, pob_country, home_address, mobile, email) 
-                 VALUES (:lastname, :firstname, :middlename, :suffix, :dob, :gender, :civilstatus, :civil_reason, :tax, :nat, :rel, :pob_city, :pob_country, :address, :mobile, :email)";
-        
-        $stmtA = $pdo->prepare($sqlA);
-        $stmtA->execute([
-            ':lastname'    => $data['lastname'],
-            ':firstname'   => $data['firstname'],
-            ':middlename'  => $data['middlename'] ?? '',
-            ':suffix'      => $data['suffix'] ?? '',
-            ':dob'         => $data['dateofbirth'],
-            ':gender'      => $data['gender'] ?? '',
-            ':civilstatus' => $data['civilstatus'] ?? '',
-            ':civil_reason'=> $data['reasonforother'] ?? '',
-            ':tax'         => $data['taxnumber'] ?? '',
-            ':nat'         => $data['nationality'],
-            ':rel'         => $data['religion'] ?? '',
-            ':pob_city'    => $data['city&province'] ?? '',
-            ':pob_country' => $data['city&country'] ?? '',
-            ':address'     => $data['final_address'],
-            ':mobile'      => $data['mobilenumber'],
-            ':email'       => $data['emailaddress']
-        ]);
+        // Check if we are updating an existing user or creating a new one
+        $reg_id = !empty($data['reg_id']) ? $data['reg_id'] : null;
 
-        $lastId = $pdo->lastInsertId();
+        if ($reg_id) {
+            // --- UPDATE MODE ---
+            
+            // 1. Update Personal Data
+            $sqlA = "UPDATE personal_data SET lastname=?, firstname=?, middlename=?, suffix=?, dob=?, gender=?, civilstatus=?, civil_status_reason=?, tax_number=?, nationality=?, religion=?, pob_city=?, pob_country=?, home_address=?, mobile=?, email=? WHERE reg_id=?";
+            $pdo->prepare($sqlA)->execute([
+                $data['lastname'], $data['firstname'], $data['middlename'] ?? '', $data['suffix'] ?? '', $data['dateofbirth'], $data['gender'] ?? '', $data['civilstatus'] ?? '', $data['reasonforother'] ?? '', $data['taxnumber'] ?? '', $data['nationality'], $data['religion'] ?? '', $data['city&province'] ?? '', $data['city&country'] ?? '', $data['final_address'], $data['mobilenumber'], $data['emailaddress'], $reg_id
+            ]);
 
-      // BENEFICIARIES NGA PART
-        $childrenStr = "";
-        if (!empty($data['childfirstname1'])) { $childrenStr .= "Child 1: " . $data['childfirstname1'] . " " . $data['childlastname1'] . "; "; }
-        if (!empty($data['childfirstname2'])) { $childrenStr .= "Child 2: " . $data['childfirstname2'] . " " . $data['childlastname2'] . "; "; }
-        if (!empty($data['childfirstname3'])) { $childrenStr .= "Child 3: " . $data['childfirstname3'] . " " . $data['childlastname3'] . "; "; }
-        if (!empty($data['childfirstname4'])) { $childrenStr .= "Child 4: " . $data['childfirstname4'] . " " . $data['childlastname4'] . "; "; }
-        if (!empty($data['childfirstname5'])) { $childrenStr .= "Child 5: " . $data['childfirstname5'] . " " . $data['childlastname5'] . "; "; }
+            // 2. Update Beneficiaries
+            $sqlB = "UPDATE beneficiaries_data SET child_lname1=?, child_fname1=?, child_mname1=?, child_sname1=?, child_dob1=?, child_lname2=?, child_fname2=?, child_mname2=?, child_sname2=?, child_dob2=?, child_lname3=?, child_fname3=?, child_mname3=?, child_sname3=?, child_dob3=?, child_lname4=?, child_fname4=?, child_mname4=?, child_sname4=?, child_dob4=?, child_lname5=?, child_fname5=?, child_mname5=?, child_sname5=?, child_dob5=?, other_lname1=?, other_fname1=?, other_mname1=?, other_sname1=?, other_rel1=?, other_dob1=?, other_lname2=?, other_fname2=?, other_mname2=?, other_sname2=?, other_rel2=?, other_dob2=? WHERE reg_id=?";
+            $pdo->prepare($sqlB)->execute([
+                $data['childlastname1'] ?? '', $data['childfirstname1'] ?? '', $data['childmiddlename1'] ?? '', $data['childsuffixname1'] ?? '', !empty($data['childbirthdate1']) ? $data['childbirthdate1'] : null,
+                $data['childlastname2'] ?? '', $data['childfirstname2'] ?? '', $data['childmiddlename2'] ?? '', $data['childsuffixname2'] ?? '', !empty($data['childbirthdate2']) ? $data['childbirthdate2'] : null,
+                $data['childlastname3'] ?? '', $data['childfirstname3'] ?? '', $data['childmiddlename3'] ?? '', $data['childsuffixname3'] ?? '', !empty($data['childbirthdate3']) ? $data['childbirthdate3'] : null,
+                $data['childlastname4'] ?? '', $data['childfirstname4'] ?? '', $data['childmiddlename4'] ?? '', $data['childsuffixname4'] ?? '', !empty($data['childbirthdate4']) ? $data['childbirthdate4'] : null,
+                $data['childlastname5'] ?? '', $data['childfirstname5'] ?? '', $data['childmiddlename5'] ?? '', $data['childsuffixname5'] ?? '', !empty($data['childbirthdate5']) ? $data['childbirthdate5'] : null,
+                $data['otherlastname1'] ?? '', $data['otherfirstname1'] ?? '', $data['othermiddlename1'] ?? '', $data['othersuffixname1'] ?? '', $data['otherrelationship1'] ?? '', !empty($data['otherdateofbirth1']) ? $data['otherdateofbirth1'] : null,
+                $data['otherlastname2'] ?? '', $data['otherfirstname2'] ?? '', $data['othermiddlename2'] ?? '', $data['othersuffixname2'] ?? '', $data['otherrelationship2'] ?? '', !empty($data['otherdateofbirth2']) ? $data['otherdateofbirth2'] : null,
+                $reg_id
+            ]);
 
-        $other_bene = ($data['otherfirstname1'] ?? '') . " " . ($data['otherlastname1'] ?? '') . " (" . ($data['otherrelationship1'] ?? '') . ")";
+            // 3. Update Employment/Certification
+            $sqlC = "UPDATE employment_certification SET employment_type=?, monthly_earnings=?, profession=?, cert_date=?, year_prof_started=?, foreign_address=?, ofw_monthly_earnings=?, flexifund_membership=?, spouse_sss_no=?, spouse_monthly_income=?, printed_name=? WHERE reg_id=?";
+            $empType = !empty($data['monthearn']) ? 'OFW' : (!empty($data['SSSno']) ? 'Non-Working Spouse' : 'Self-Employed');
+            $pdo->prepare($sqlC)->execute([
+                $empType, $data['monthlyearning'] ?? 0, $data['profession/business'] ?? 'N/A', $data['Ddate'] ?? date('Y-m-d'), !empty($data['yearprof']) ? $data['yearprof'] : null, $data['foreignaddress'] ?? '', $data['monthearn'] ?? 0, $data['flexifund'] ?? 'no', $data['SSSno'] ?? '', $data['monthyincomespouse'] ?? 0, $data['Dprintedname'] ?? '', $reg_id
+            ]);
 
-        $sqlB = "INSERT INTO beneficiaries_data (reg_id, children_info, other_beneficiaries) VALUES (?, ?, ?)";
-        $pdo->prepare($sqlB)->execute([$lastId, $childrenStr, $other_bene]);
- 
-       // EMPLOYEMENT CERTIFICATION NI DIRING DAPITA
-        $empType = !empty($data['monthearn']) ? 'OFW' : 'Self-Employed';
-        $earnings = !empty($data['monthlyearning']) ? $data['monthlyearning'] : ($data['monthearn'] ?? '0');
-        
-        $sqlC = "INSERT INTO employment_certification (reg_id, monthly_earnings, profession, employment_type, cert_date) VALUES (?, ?, ?, ?, ?)";
-        $pdo->prepare($sqlC)->execute([
-            $lastId,
-            $earnings,
-            $data['profession/business'] ?? 'N/A',
-            $empType,
-            $data['Ddate'] ?? date('Y-m-d')
-        ]);
+            // 4. Update Family
+            $sqlE = "UPDATE family_data SET father_lname=?, father_fname=?, father_mname=?, father_suffix=?, mother_lname=?, mother_fname=?, mother_mname=?, mother_suffix=?, spouse_lname=?, spouse_fname=?, spouse_mname=?, spouse_suffix=? WHERE reg_id=?";
+            $pdo->prepare($sqlE)->execute([
+                $data['fatherlname'] ?? '', $data['fatherfirstname'] ?? '', $data['fathermiddlename'] ?? '', $data['fathersuffix'] ?? '', $data['motherlname'] ?? '', $data['motherfname'] ?? '', $data['mothermiddlename'] ?? '', $data['mothersuffix'] ?? '', $data['spouselname'] ?? '', $data['spousefirstname'] ?? '', $data['spousemiddlename'] ?? '', $data['spousesuffix'] ?? '', $reg_id
+            ]);
 
-       // SSS INTERNAL DATA
-        $sqlD = "INSERT INTO sss_internal_data (reg_id, ss_number, business_code, msc_amount, processed_by) VALUES (?, ?, ?, ?, ?)";
-        $pdo->prepare($sqlD)->execute([
-            $lastId,
-            $data['SSSno'] ?? '',
-            $data['businesscode'] ?? '',
-            $data['approvedmsc'] ?? '0',
-            "SSS System" 
-        ]);
+            // 5. Update SSS Internal (Part 2)
+            $sqlD = "UPDATE sss_internal_data SET ss_number=?, business_code=?, msc_amount=?, monthly_ss_contribution=?, start_of_payment=?, working_spouse_msc=?, flexi_fund_app=?, received_date=?, processed_date=?, reviewed_date=? WHERE reg_id=?";
+            $pdo->prepare($sqlD)->execute([
+                $data['SSSno'] ?? '', 
+                $data['businesscode'] ?? '', 
+                $data['approvedmsc'] ?? 0, 
+                $data['monthlysscontribution'] ?? 0, 
+                !empty($data['startofpayment']) ? $data['startofpayment'] : null, 
+                $data['workingspouseMSC'] ?? 0, 
+                $data['flexiapplication'] ?? null, 
+                !empty($data['dateandtime1']) ? $data['dateandtime1'] : null, 
+                !empty($data['dateandtime2']) ? $data['dateandtime2'] : null, 
+                !empty($data['dateandtime3']) ? $data['dateandtime3'] : null, 
+                $reg_id
+            ]);
 
-// LAST KAY FAM DATA
-        $sqlE = "INSERT INTO family_data (reg_id, father_name, mother_name, spouse_name) VALUES (?, ?, ?, ?)";
-        $pdo->prepare($sqlE)->execute([
-            $lastId,
-            trim(($data['fatherfirstname'] ?? '') . " " . ($data['fatherlname'] ?? '')),
-            trim(($data['motherfname'] ?? '') . " " . ($data['motherlname'] ?? '')),
-            trim(($data['spousefirstname'] ?? '') . " " . ($data['spouselname'] ?? ''))
-        ]);
+        } else {
+            // --- INSERT MODE (New User) ---
+            
+            // A. Personal Data
+            $sqlA = "INSERT INTO personal_data (lastname, firstname, middlename, suffix, dob, gender, civilstatus, civil_status_reason, tax_number, nationality, religion, pob_city, pob_country, home_address, mobile, email) 
+                     VALUES (:lastname, :firstname, :middlename, :suffix, :dob, :gender, :civilstatus, :civil_reason, :tax, :nat, :rel, :pob_city, :pob_country, :address, :mobile, :email)";
+            $stmtA = $pdo->prepare($sqlA);
+            $stmtA->execute([
+                ':lastname' => $data['lastname'], ':firstname' => $data['firstname'], ':middlename' => $data['middlename'] ?? '', ':suffix' => $data['suffix'] ?? '', ':dob' => $data['dateofbirth'], ':gender' => $data['gender'] ?? '', ':civilstatus' => $data['civilstatus'] ?? '', ':civil_reason' => $data['reasonforother'] ?? '', ':tax' => $data['taxnumber'] ?? '', ':nat' => $data['nationality'], ':rel' => $data['religion'] ?? '', ':pob_city' => $data['city&province'] ?? '', ':pob_country' => $data['city&country'] ?? '', ':address' => $data['final_address'], ':mobile' => $data['mobilenumber'], ':email' => $data['emailaddress']
+            ]);
+
+            $lastId = $pdo->lastInsertId();
+
+            // B. Beneficiaries
+            $sqlB = "INSERT INTO beneficiaries_data (reg_id, child_lname1, child_fname1, child_mname1, child_sname1, child_dob1, child_lname2, child_fname2, child_mname2, child_sname2, child_dob2, child_lname3, child_fname3, child_mname3, child_sname3, child_dob3, child_lname4, child_fname4, child_mname4, child_sname4, child_dob4, child_lname5, child_fname5, child_mname5, child_sname5, child_dob5, other_lname1, other_fname1, other_mname1, other_sname1, other_rel1, other_dob1, other_lname2, other_fname2, other_mname2, other_sname2, other_rel2, other_dob2) 
+                     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            $pdo->prepare($sqlB)->execute([
+                $lastId, 
+                $data['childlastname1'] ?? '', $data['childfirstname1'] ?? '', $data['childmiddlename1'] ?? '', $data['childsuffixname1'] ?? '', !empty($data['childbirthdate1']) ? $data['childbirthdate1'] : null,
+                $data['childlastname2'] ?? '', $data['childfirstname2'] ?? '', $data['childmiddlename2'] ?? '', $data['childsuffixname2'] ?? '', !empty($data['childbirthdate2']) ? $data['childbirthdate2'] : null,
+                $data['childlastname3'] ?? '', $data['childfirstname3'] ?? '', $data['childmiddlename3'] ?? '', $data['childsuffixname3'] ?? '', !empty($data['childbirthdate3']) ? $data['childbirthdate3'] : null,
+                $data['childlastname4'] ?? '', $data['childfirstname4'] ?? '', $data['childmiddlename4'] ?? '', $data['childsuffixname4'] ?? '', !empty($data['childbirthdate4']) ? $data['childbirthdate4'] : null,
+                $data['childlastname5'] ?? '', $data['childfirstname5'] ?? '', $data['childmiddlename5'] ?? '', $data['childsuffixname5'] ?? '', !empty($data['childbirthdate5']) ? $data['childbirthdate5'] : null,
+                $data['otherlastname1'] ?? '', $data['otherfirstname1'] ?? '', $data['othermiddlename1'] ?? '', $data['othersuffixname1'] ?? '', $data['otherrelationship1'] ?? '', !empty($data['otherdateofbirth1']) ? $data['otherdateofbirth1'] : null,
+                $data['otherlastname2'] ?? '', $data['otherfirstname2'] ?? '', $data['othermiddlename2'] ?? '', $data['othersuffixname2'] ?? '', $data['otherrelationship2'] ?? '', !empty($data['otherdateofbirth2']) ? $data['otherdateofbirth2'] : null
+            ]);
+
+            // C. Employment
+            $sqlC = "INSERT INTO employment_certification (reg_id, employment_type, monthly_earnings, profession, cert_date, year_prof_started, foreign_address, ofw_monthly_earnings, flexifund_membership, spouse_sss_no, spouse_monthly_income, printed_name) 
+                     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            $empType = !empty($data['monthearn']) ? 'OFW' : (!empty($data['SSSno']) ? 'Non-Working Spouse' : 'Self-Employed');
+            $pdo->prepare($sqlC)->execute([
+                $lastId, $empType, $data['monthlyearning'] ?? 0, $data['profession/business'] ?? 'N/A', $data['Ddate'] ?? date('Y-m-d'), !empty($data['yearprof']) ? $data['yearprof'] : null, $data['foreignaddress'] ?? '', $data['monthearn'] ?? 0, $data['flexifund'] ?? 'no', $data['SSSno'] ?? '', $data['monthyincomespouse'] ?? 0, $data['Dprintedname'] ?? ''
+            ]);
+
+            // E. Family
+            $sqlE = "INSERT INTO family_data (reg_id, father_lname, father_fname, father_mname, father_suffix, mother_lname, mother_fname, mother_mname, mother_suffix, spouse_lname, spouse_fname, spouse_mname, spouse_suffix) 
+                     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            $pdo->prepare($sqlE)->execute([
+                $lastId, $data['fatherlname'] ?? '', $data['fatherfirstname'] ?? '', $data['fathermiddlename'] ?? '', $data['fathersuffix'] ?? '', $data['motherlname'] ?? '', $data['motherfname'] ?? '', $data['mothermiddlename'] ?? '', $data['mothersuffix'] ?? '', $data['spouselname'] ?? '', $data['spousefirstname'] ?? '', $data['spousemiddlename'] ?? '', $data['spousesuffix'] ?? ''
+            ]);
+
+            // 6. Insert SSS Internal (Part 2)
+            $sqlD = "INSERT INTO sss_internal_data (reg_id, ss_number, business_code, msc_amount, monthly_ss_contribution, start_of_payment, working_spouse_msc, flexi_fund_app, received_date, processed_date, reviewed_date, processed_by) 
+                     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            $pdo->prepare($sqlD)->execute([
+                $lastId, 
+                $data['SSSno'] ?? '', 
+                $data['businesscode'] ?? '', 
+                $data['approvedmsc'] ?? 0, 
+                $data['monthlysscontribution'] ?? 0, 
+                !empty($data['startofpayment']) ? $data['startofpayment'] : null, 
+                $data['workingspouseMSC'] ?? 0, 
+                $data['flexiapplication'] ?? null, 
+                !empty($data['dateandtime1']) ? $data['dateandtime1'] : null, 
+                !empty($data['dateandtime2']) ? $data['dateandtime2'] : null, 
+                !empty($data['dateandtime3']) ? $data['dateandtime3'] : null, 
+                "SSS System"
+            ]);
+        }
 
         $pdo->commit();
         return true;
-
     } catch (Exception $e) {
-        if ($pdo->inTransaction()) {
-            $pdo->rollBack();
-        }
-        error_log("Registration Error: " . $e->getMessage());
+        if ($pdo->inTransaction()) $pdo->rollBack();
+        $_SESSION['db_error'] = $e->getMessage();
         return false;
     }
 }
 
-// CHECKING NI DAPITA PARA FOR THE SUBMIT BUTTON
+// Handle Form Submission
 if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['submitinformation'])) {
     
-
+    // Address Logic
     $finalAddress = "";
     if (isset($_POST['samehomeaddress'])) {
         $finalAddress = $_POST['city&province'] ?? '';
     } else {
-        $parts = [
-            $_POST['rmflrunit'] ?? '',
-            $_POST['streetname'] ?? '',
-            $_POST['citymuni'] ?? ''
-        ];
-        $finalAddress = implode(" ", array_filter($parts)); 
+        $parts = [$_POST['rmflrunit'] ?? '', $_POST['streetname'] ?? '', $_POST['citymuni'] ?? ''];
+        $finalAddress = implode(" ", array_filter($parts));
     }
-
-
     $_POST['final_address'] = $finalAddress;
 
-// CALLING OF FUNCTION NGA PART
-    $result = saveSSSRegistration($pdo, $_POST);
-
-    if ($result) {
-        echo "<script>alert('All data successfully linked and saved!'); window.location='index.php';</script>";
-        exit;
+    if (saveSSSRegistration($pdo, $_POST)) {
+        echo "<script>alert('Data saved successfully!'); window.location='view_list.php';</script>";
     } else {
-        echo "<script>alert('Error: Could not save data. Check logs.'); window.history.back();</script>";
-        exit;
+        $errMsg = addslashes($_SESSION['db_error'] ?? 'Unknown error');
+        echo "<script>alert('Error: $errMsg'); window.history.back();</script>";
+        unset($_SESSION['db_error']);
     }
-} else {
-    header("Location: index.php");
-    exit;
 }
 ?>
