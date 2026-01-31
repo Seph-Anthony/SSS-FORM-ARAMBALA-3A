@@ -1,12 +1,23 @@
 <?php
 require "db.php";
 
-// 1. Initialize ALL variables
-$id = ""; // This will hold the reg_id if we are editing
+// 1. INITIALIZE ALL VARIABLES (AYAW KALIMOT!)
+$id = "";
 $lastname = ""; $firstname = ""; $middlename = ""; $suffix = ""; $dob = "";
 $gender = ""; $civilstatus = ""; $reasonforother = ""; $taxnumber = "";
 $nationality = ""; $religion = ""; $city_province = ""; $city_country = "";
 $mobile = ""; $email = ""; $telephone = "";
+
+// INITIALIZE ALL 9 ADDRESS VARIABLES
+$addr_rm = ""; 
+$addr_house_lot = ""; 
+$addr_street = ""; 
+$addr_subdivision = ""; 
+$addr_brgy = ""; 
+$addr_city = ""; 
+$addr_province = ""; 
+$addr_country = ""; 
+$addr_zip = "";
 
 $flname = ""; $ffname = ""; $fmname = ""; $fsuffix = "";
 $mlname = ""; $mfname = ""; $mmname = ""; $msuffix = "";
@@ -31,22 +42,43 @@ $business_code = ""; $monthly_ss = ""; $start_pay = "";
 $spouse_msc = ""; $approved_msc = ""; $flexi_app = "";
 $date_rec = ""; $date_proc = ""; $date_rev = ""; $ss_number = "";
 
-// 2. Check if we are in "Edit Mode"
+// 2. CHECK IF WE ARE IN EDIT MODE
 if (isset($_GET['edit_id'])) {
     $id = $_GET['edit_id'];
 
     try {
-        // PERSONAL DATA
+        // PERSONAL DATA - Updated to include all separate address columns
         $stmt = $pdo->prepare("SELECT * FROM personal_data WHERE reg_id = ?");
         $stmt->execute([$id]);
         $user = $stmt->fetch();
         if ($user) {
-            $lastname = $user['lastname']; $firstname = $user['firstname']; $middlename = $user['middlename'];
-            $suffix = $user['suffix']; $dob = $user['dob']; $gender = $user['gender'];
-            $civilstatus = $user['civilstatus']; $reasonforother = $user['civil_status_reason'];
-            $taxnumber = $user['tax_number']; $nationality = $user['nationality'];
-            $religion = $user['religion']; $city_province = $user['pob_city'];
-            $city_country = $user['pob_country']; $mobile = $user['mobile']; $email = $user['email'];
+            $lastname = $user['lastname']; 
+            $firstname = $user['firstname']; 
+            $middlename = $user['middlename'];
+            $suffix = $user['suffix']; 
+            $dob = $user['dob']; 
+            $gender = $user['gender'];
+            $civilstatus = $user['civilstatus']; 
+            $reasonforother = $user['civil_status_reason'];
+            $taxnumber = $user['tax_number']; 
+            $nationality = $user['nationality'];
+            $religion = $user['religion']; 
+            $city_province = $user['pob_city'];
+            $city_country = $user['pob_country']; 
+            
+            // FETCHING ALL 9 ADDRESS FIELDS FROM DATABASE
+            $addr_rm          = $user['addr_rm_flr'] ?? "";
+            $addr_house_lot   = $user['addr_house_lot'] ?? "";
+            $addr_street      = $user['addr_street'] ?? "";
+            $addr_subdivision = $user['addr_subdivision'] ?? "";
+            $addr_brgy        = $user['addr_brgy'] ?? "";
+            $addr_city        = $user['addr_city_muni'] ?? "";
+            $addr_province    = $user['addr_province'] ?? "";
+            $addr_country     = $user['addr_country'] ?? "";
+            $addr_zip         = $user['addr_zip'] ?? "";
+            
+            $mobile = $user['mobile']; 
+            $email = $user['email'];
         }
 
         // FAMILY & SPOUSE
@@ -54,12 +86,12 @@ if (isset($_GET['edit_id'])) {
         $stmtFam->execute([$id]);
         $fam = $stmtFam->fetch();
         if ($fam) {
-            $flname = $fam['father_lname'] ?? ""; $ffname = $fam['father_fname'] ?? ""; 
-            $fmname = $fam['father_mname'] ?? ""; $fsuffix = $fam['father_suffix'] ?? "";
-            $mlname = $fam['mother_lname'] ?? ""; $mfname = $fam['mother_fname'] ?? ""; 
-            $mmname = $fam['mother_mname'] ?? ""; $msuffix = $fam['mother_suffix'] ?? "";
-            $slname = $fam['spouse_lname'] ?? ""; $sfname = $fam['spouse_fname'] ?? ""; 
-            $smname = $fam['spouse_mname'] ?? ""; $ssuffix = $fam['spouse_suffix'] ?? "";
+            $flname = $fam['father_lname']; $ffname = $fam['father_fname']; 
+            $fmname = $fam['father_mname']; $fsuffix = $fam['father_suffix'];
+            $mlname = $fam['mother_lname']; $mfname = $fam['mother_fname']; 
+            $mmname = $fam['mother_mname']; $msuffix = $fam['mother_suffix'];
+            $slname = $fam['spouse_lname']; $sfname = $fam['spouse_fname']; 
+            $smname = $fam['spouse_mname']; $ssuffix = $fam['spouse_suffix'];
         }
 
         // BENEFICIARIES
@@ -68,19 +100,19 @@ if (isset($_GET['edit_id'])) {
         $ben = $stmtBen->fetch();
         if ($ben) {
             for ($i = 1; $i <= 5; $i++) {
-                ${"clname$i"} = $ben["child_lname$i"] ?? "";
-                ${"cfname$i"} = $ben["child_fname$i"] ?? "";
-                ${"cmname$i"} = $ben["child_mname$i"] ?? "";
-                ${"csuffix$i"} = $ben["child_sname$i"] ?? "";
-                ${"cdob$i"}   = $ben["child_dob$i"] ?? "";
+                ${"clname$i"} = $ben["child_lname$i"];
+                ${"cfname$i"} = $ben["child_fname$i"];
+                ${"cmname$i"} = $ben["child_mname$i"];
+                ${"csuffix$i"} = $ben["child_sname$i"];
+                ${"cdob$i"}   = $ben["child_dob$i"];
             }
             for ($i = 1; $i <= 2; $i++) {
-                ${"olname$i"} = $ben["other_lname$i"] ?? "";
-                ${"ofname$i"} = $ben["other_fname$i"] ?? "";
-                ${"omname$i"} = $ben["other_mname$i"] ?? "";
-                ${"osname$i"} = $ben["other_sname$i"] ?? "";
-                ${"orel$i"}   = $ben["other_rel$i"] ?? "";
-                ${"odob$i"}   = $ben["other_dob$i"] ?? "";
+                ${"olname$i"} = $ben["other_lname$i"];
+                ${"ofname$i"} = $ben["other_fname$i"];
+                ${"omname$i"} = $ben["other_mname$i"];
+                ${"osname$i"} = $ben["other_sname$i"];
+                ${"orel$i"}   = $ben["other_rel$i"];
+                ${"odob$i"}   = $ben["other_dob$i"];
             }
         }
 
@@ -89,16 +121,16 @@ if (isset($_GET['edit_id'])) {
         $stmtEmp->execute([$id]);
         $emp = $stmtEmp->fetch();
         if ($emp) {
-            $profession = $emp['profession'] ?? "";
-            $yearprof = $emp['year_prof_started'] ?? ""; 
-            $monthlyearning = $emp['monthly_earnings'] ?? "";
-            $foreignaddress = $emp['foreign_address'] ?? "";
-            $monthearn = $emp['ofw_monthly_earnings'] ?? "";
-            $flexifund = $emp['flexifund_membership'] ?? "";
-            $sssno_spouse = $emp['spouse_sss_no'] ?? "";
-            $income_spouse = $emp['spouse_monthly_income'] ?? "";
-            $cert_printed_name = $emp['printed_name'] ?? "";
-            $cert_date = $emp['cert_date'] ?? "";
+            $profession = $emp['profession'];
+            $yearprof = $emp['year_prof_started']; 
+            $monthlyearning = $emp['monthly_earnings'];
+            $foreignaddress = $emp['foreign_address'];
+            $monthearn = $emp['ofw_monthly_earnings'];
+            $flexifund = $emp['flexifund_membership'];
+            $sssno_spouse = $emp['spouse_sss_no'];
+            $income_spouse = $emp['spouse_monthly_income'];
+            $cert_printed_name = $emp['printed_name'];
+            $cert_date = $emp['cert_date'];
         }
 
         // SSS INTERNAL DATA (PART 2)
@@ -106,16 +138,16 @@ if (isset($_GET['edit_id'])) {
         $stmtInt->execute([$id]);
         $internal = $stmtInt->fetch();
         if ($internal) {
-            $ss_number = $internal['ss_number'] ?? "";
-            $business_code = $internal['business_code'] ?? "";
-            $approved_msc = $internal['msc_amount'] ?? "";
-            $monthly_ss = $internal['monthly_ss_contribution'] ?? "";
-            $start_pay = $internal['start_of_payment'] ?? "";
-            $spouse_msc = $internal['working_spouse_msc'] ?? "";
-            $flexi_app = $internal['flex_i_fund_app'] ?? "";
-            $date_rec = $internal['received_date'] ?? "";
-            $date_proc = $internal['processed_date'] ?? "";
-            $date_rev = $internal['reviewed_date'] ?? "";
+            $ss_number = $internal['ss_number'];
+            $business_code = $internal['business_code'];
+            $approved_msc = $internal['msc_amount'];
+            $monthly_ss = $internal['monthly_ss_contribution'];
+            $start_pay = $internal['start_of_payment'];
+            $spouse_msc = $internal['working_spouse_msc'];
+            $flexi_app = $internal['flexi_fund_app'] ?? ""; 
+            $date_rec = $internal['received_date'];
+            $date_proc = $internal['processed_date'];
+            $date_rev = $internal['reviewed_date'];
         }
 
     } catch (PDOException $e) {
@@ -132,7 +164,7 @@ if (isset($_GET['edit_id'])) {
     <link rel="stylesheet" href="index.css" />
   </head>
   <body>
-    <form action="store.php" method="post">
+    <form action="<?= !empty($id) ? 'update.php' : 'store.php' ?>" method="POST" enctype="multipart/form-data">
       <input type="hidden" name="reg_id" value="<?= $id ?>">
       <div class="outercontainer">
         <div class="PART1">
@@ -235,51 +267,57 @@ if (isset($_GET['edit_id'])) {
         </div>
     </div>
 
-    <div id="home-address-section">
-        <div class="Asection4">
-            <div class="homeaddress"><h3>HOME ADDRESS:</h3></div>
-            <div class="rmunit">
-                <p>(RM/FLR/UNIT NO. & BLDG. NAME)</p>
-                <input type="text" name="rmflrunit" />
-            </div>
-            <div class="houselot">
-                <p>(HOUSE/LOT & BLK. NO)</p>
-                <input type="text" name="house/lot" />
-            </div>
-            <div class="streetname">
-                <p>(STREET NAME)</p>
-                <input type="text" name="streetname" />
-            </div>
-            <div class="subdivision">
-                <p>(SUBDIVISION)</p>
-                <input type="text" name="subdivision" />
-            </div>
+   <div id="home-address-section">
+    <div class="Asection4">
+        <div class="homeaddress"><h3>HOME ADDRESS:</h3></div>
+        
+        <div class="rmunit">
+            <p>(RM/FLR/UNIT NO. & BLDG. NAME)</p>
+            <input type="text" name="rmflrunit" value="<?= htmlspecialchars($addr_rm) ?>" />
         </div>
 
-        <div class="Asection5">
-            <div class="bardisloc">
-                <p>(BARANGAY/DISTRICT/LOCALITY)</p>
-                <input type="text" name="bardisloc"/>
-            </div>
-            <div class="citymuni">
-                <p>(CITY/MUNICIPALITY)</p>
-                <input type="text" name="citymuni"/>
-            </div>
-            <div class="province">
-                <p>(PROVINCE)</p>
-                <input type="text" name="province"/>
-            </div>
-            <div class="country">
-                <p>(COUNTRY)</p>
-                <input type="text" name="country"/>
-            </div>
-            <div class="zip">
-                <p>ZIPCODE</p>
-                <input type="number" name="zipcode"/>
-            </div>
+        <div class="houselot">
+            <p>(HOUSE/LOT & BLK. NO)</p>
+            <input type="text" name="houselot" value="<?= htmlspecialchars($addr_house_lot ?? '') ?>" />
+        </div>
+
+        <div class="streetname">
+            <p>(STREET NAME)</p>
+            <input type="text" name="streetname" value="<?= htmlspecialchars($addr_street) ?>" />
+        </div>
+
+        <div class="subdivision">
+            <p>(SUBDIVISION)</p>
+            <input type="text" name="subdivision" value="<?= htmlspecialchars($addr_subdivision ?? '') ?>" />
         </div>
     </div>
-</div>
+
+    <div class="Asection5">
+        <div class="bardisloc">
+            <p>(BARANGAY/DISTRICT/LOCALITY)</p>
+            <input type="text" name="bardisloc" value="<?= htmlspecialchars($addr_brgy ?? '') ?>"/>
+        </div>
+
+        <div class="citymuni">
+            <p>(CITY/MUNICIPALITY)</p>
+            <input type="text" name="citymuni" value="<?= htmlspecialchars($addr_city) ?>"/>
+        </div>
+
+        <div class="province">
+            <p>(PROVINCE)</p>
+            <input type="text" name="province" value="<?= htmlspecialchars($addr_province ?? '') ?>"/>
+        </div>
+
+        <div class="country">
+            <p>(COUNTRY)</p>
+            <input type="text" name="country" value="<?= htmlspecialchars($addr_country ?? '') ?>"/>
+        </div>
+
+        <div class="zip">
+            <p>ZIPCODE</p>
+            <input type="number" name="zipcode" value="<?= htmlspecialchars($addr_zip ?? '') ?>"/>
+        </div>
+    </div>
 </div>
             <div class="Asection6">
     <div class="cellnum">
